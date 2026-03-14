@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripuraToday — News, Info & Jobs</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --accent: #f5a623;
+    --accent2: #e84545;
+    --teal: #00c9a7;
+    --blue: #3b82f6;
+    --text: #f0f4ff;
+    --muted: #8899bb;
+    --border: rgba(255,255,255,0.07);
+    --card-hover: rgba(245,166,35,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === HEADER === */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: #000;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -1px;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text span { color: var(--accent); }
+
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,69,69,0.15);
+    border: 1px solid rgba(232,69,69,0.3);
+    color: var(--accent2);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 1.4s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* === TICKER === */
+  .ticker {
+    background: var(--accent);
+    color: #000;
+    overflow: hidden;
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-label {
+    background: #000;
+    color: var(--accent);
+    padding: 0 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  .ticker-track {
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 60px;
+    animation: ticker 40s linear infinite;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* === HERO === */
+  .hero {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(245,166,35,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  .hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .hashtag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .hashtag:hover, .hashtag.active {
+    background: var(--teal);
+    color: #000;
+    border-color: var(--teal);
+  }
+
+  /* === TABS === */
+  .tabs-bar {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 0;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs-bar::-webkit-scrollbar { display: none; }
+
+  .tab {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab:hover { color: var(--text); background: var(--surface2); }
+
+  .tab.active {
+    background: var(--surface2);
+    color: var(--accent);
+    border-color: var(--accent);
+    border-bottom-color: var(--surface2);
+  }
+
+  .tab-count {
+    background: rgba(245,166,35,0.15);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  /* === MAIN === */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+
+  .tab-panel {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 0 8px 8px 8px;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* === CONTROLS === */
+  .controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .refresh-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+
+  .refresh-btn:hover { opacity: 0.85; transform: scale(0.98); }
+  .refresh-btn.loading .spin { animation: spin 0.8s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box:focus { border-color: var(--accent); }
+  .search-box::placeholder { color: var(--muted); }
+
+  .status-info {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* === NEWS GRID === */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+
+  .news-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.22s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .news-card:hover {
+    border-color: rgba(245,166,35,0.35);
+    background: var(--card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .news-card:hover::before { opacity: 1; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-source {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .source-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+  }
+
+  .card-time {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .card-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  .tag-news { border-color: rgba(59,130,246,0.4); color: #3b82f6; }
+  .tag-job { border-color: rgba(0,201,167,0.4); color: var(--teal); }
+  .tag-politics { border-color: rgba(245,166,35,0.4); color: var(--accent); }
+  .tag-sports { border-color: rgba(232,69,69,0.4); color: var(--accent2); }
+  .tag-development { border-color: rgba(139,92,246,0.4); color: #a78bfa; }
+
+  .card-link-arrow {
+    margin-left: auto;
+    color: var(--accent);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .news-card:hover .card-link-arrow { opacity: 1; }
+
+  /* === SKELETON === */
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+
+  .skeleton-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skel {
+    background: linear-gradient(90deg, var(--surface2) 25%, rgba(255,255,255,0.04) 50%, var(--surface2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+  }
+
+  @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+  .skel-line { height: 13px; }
+  .skel-title { height: 16px; width: 90%; }
+  .skel-title2 { height: 16px; width: 70%; }
+  .skel-meta { height: 11px; width: 40%; }
+
+  /* === ERROR STATE === */
+  .error-box {
+    background: rgba(232,69,69,0.08);
+    border: 1px solid rgba(232,69,69,0.25);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .error-box h3 { color: var(--accent2); font-size: 15px; margin-bottom: 6px; }
+  .error-box p { font-size: 13px; line-height: 1.6; }
+
+  /* === INFO BOX === */
+  .info-banner {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .info-banner strong { color: var(--text); font-weight: 600; }
+  .info-banner a { color: var(--blue); text-decoration: none; }
+  .info-banner a:hover { text-decoration: underline; }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer strong { color: var(--text); }
+
+  /* === EMPTY STATE === */
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.8rem; }
+    .news-grid, .skeleton-grid { grid-template-columns: 1fr; }
+    .header-inner { padding: 0 1rem; }
+    .tabs-bar { padding: 1rem 1rem 0; }
+    .main { padding: 0 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">T</div>
+      <div class="logo-text">Tripura<span>Today</span></div>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      Live
+    </div>
+  </div>
+</header>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-label">&#x26A1; Breaking</div>
+  <div class="ticker-track">
+    <div class="ticker-inner" id="ticker-text">
+      <span>Loading latest Tripura headlines...</span>
+      <span>Loading latest Tripura headlines...</span>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Your <em>Tripura</em> News Hub</h1>
+  <p>Live news, government updates, job alerts & development stories — all from Tripura.</p>
+  <div class="hashtags">
+    <span class="hashtag active" data-filter="all">#TripuraNews</span>
+    <span class="hashtag" data-filter="job">#JobNews</span>
+    <span class="hashtag" data-filter="politics">#TripuraPolitics</span>
+    <span class="hashtag" data-filter="sports">#TripuraSports</span>
+    <span class="hashtag" data-filter="development">#Development</span>
+    <span class="hashtag" data-filter="info">#TripuraInfo</span>
+  </div>
+</section>
+
+<!-- Tabs -->
+<div class="tabs-bar">
+  <div class="tab active" data-tab="all">
+    &#x1F4F0; All News <span class="tab-count" id="count-all">0</span>
+  </div>
+  <div class="tab" data-tab="gnews">
+    &#x1F310; GNews Feed <span class="tab-count" id="count-gnews">0</span>
+  </div>
+  <div class="tab" data-tab="rss">
+    &#x1F4E1; RSS Feeds <span class="tab-count" id="count-rss">0</span>
+  </div>
+  <div class="tab" data-tab="jobs">
+    &#x1F4BC; Jobs <span class="tab-count" id="count-jobs">0</span>
+  </div>
+  <div class="tab" data-tab="api-guide">
+    &#x2139;&#xFE0F; Setup Guide
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ALL NEWS -->
+  <div class="tab-panel active" id="panel-all">
+    <div class="info-banner">
+      <strong>How this works:</strong> News is fetched from free public RSS feeds & news APIs. Click any card to open the original article. Data refreshes every 10 minutes automatically.
+    </div>
+    <div class="controls">
+      <button class="refresh-btn" id="refresh-all" onclick="fetchAllNews()">
+        <span class="spin">&#x21BB;</span> Refresh
+      </button>
+      <input class="search-box" type="text" id="search-all" placeholder="Search Tripura news..." oninput="filterCards('all')">
+      <span class="status-info" id="status-all">Loading...</span>
+    </div>
+    <div id="grid-all" class="news-grid"></div>
+  </div>
+
+  <!-- GNEWS -->
+  <div class="tab-panel" id="panel-gnews">
+    <div class="info-banner">
+      <strong>GNews API (Free Tier):</strong> Free — 100 requests/day, no credit card needed. Register at <a href="https://gnews.io" target="_blank">gnews.io</a> and paste your key below. Searches "Tripura" news in real-time.
+    </div>
+    <div class="controls" style="flex-wrap:wrap;">
+      <input class="search-box" type="text" id="gnews-key" placeholder="Paste your GNews API key here (free at gnews.io)" style="flex:2; min-width:260px;">
+      <button class="refresh-btn" onclick="fetchGNews()">
+        <span>&#x1F50D;</span> Fetch GNews
+      </button>
+    </div>
+    <div id="grid-gnews" class="news-grid"><div class="empty-state">&#x1F511; Enter your free GNews API key above to load live articles.</div></div>
+  </div>
+
+  <!-- RSS FEEDS -->
+  <div class="tab-panel" id="panel-rss">
+    <div class="info-banner">
+      <strong>RSS Feeds:</strong> These are free public feeds from Indian news outlets filtered for Tripura. Fetched via a free CORS proxy (rss2json.com — 10,000 requests/day free).
+    </div>
+    <div class="controls">
+      <button class="refresh-btn" id="refresh-rss" onclick="fetchRSSFeeds()">
+        <span class="spin">&#x21BB;</span> Refresh RSS
+      </button>
+      <input class="search-box" type="text" id="search-rss" placeholder="Filter RSS news..." oninput="filterCards('rss')">
+      <span class="status-info" id="status-rss">—</span>
+    </div>
+    <div id="grid-rss" class="news-grid"></div>
+  </div>
+
+  <!-- JOBS -->
+  <div class="tab-panel" id="panel-jobs">
+    <div class="info-banner">
+      <strong>Tripura Job News:</strong> Latest government jobs, TRPSC, TPSC, and recruitment notifications from Tripura — pulled from RSS news sources.
+    </div>
+    <div class="controls">
+      <button class="refresh-btn" onclick="showJobsFromStored()">
+        <span>&#x21BB;</span> Filter Jobs
+      </button>
+      <input class="search-box" type="text" id="search-jobs" placeholder="Search jobs..." oninput="filterCards('jobs')">
+      <span class="status-info" id="status-jobs">—</span>
+    </div>
+    <div id="grid-jobs" class="news-grid"><div class="empty-state">Jobs will appear here after news loads. Go to "All News" tab first.</div></div>
+  </div>
+
+  <!-- API GUIDE -->
+  <div class="tab-panel" id="panel-api-guide">
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--accent); margin-bottom:1.25rem;">Free API Services for Tripura News</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem;">
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#00c9a7;"></span> GNews API</div>
+        <div class="card-title">gnews.io — Best Free Option</div>
+        <div class="card-desc">100 requests/day free. Search any topic including "Tripura". No credit card. API key in seconds.</div>
+        <a href="https://gnews.io" target="_blank" style="color:var(--teal); font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; gnews.io (Free Signup)</a>
+      </div>
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#f5a623;"></span> NewsAPI.org</div>
+        <div class="card-title">newsapi.org — Developer Plan</div>
+        <div class="card-desc">100 requests/day free (development only). Supports India news. Upgrade needed for production.</div>
+        <a href="https://newsapi.org" target="_blank" style="color:var(--accent); font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; newsapi.org (Free Dev Key)</a>
+      </div>
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#3b82f6;"></span> RSS2JSON</div>
+        <div class="card-title">rss2json.com — CORS-free RSS</div>
+        <div class="card-desc">10,000 req/day free. Converts any RSS feed to JSON. Used by this site already. No signup needed.</div>
+        <a href="https://rss2json.com" target="_blank" style="color:var(--blue); font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; rss2json.com (No Signup)</a>
+      </div>
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#a78bfa;"></span> Mediastack</div>
+        <div class="card-title">mediastack.com — 500/month free</div>
+        <div class="card-desc">500 free requests/month. Filter by country=IN, keywords=tripura. Reliable real-time news.</div>
+        <a href="https://mediastack.com" target="_blank" style="color:#a78bfa; font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; mediastack.com (Free Tier)</a>
+      </div>
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#e84545;"></span> The News API</div>
+        <div class="card-title">thenewsapi.com — 100/day free</div>
+        <div class="card-desc">100 free requests/day. Good India coverage. API key available instantly after free signup.</div>
+        <a href="https://www.thenewsapi.com" target="_blank" style="color:var(--accent2); font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; thenewsapi.com (Free)</a>
+      </div>
+
+      <div class="news-card" style="cursor:default;">
+        <div class="card-source"><span class="source-dot" style="background:#f5a623;"></span> CurrentsAPI</div>
+        <div class="card-title">currentsapi.services — Free</div>
+        <div class="card-desc">600 free requests/day. Search news by language and country. Includes India. No credit card needed.</div>
+        <a href="https://currentsapi.services" target="_blank" style="color:var(--accent); font-size:12px; font-weight:600; text-decoration:none; margin-top:4px;">&#x2192; currentsapi.services</a>
+      </div>
+
+    </div>
+
+    <div style="margin-top:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1.2rem;">
+      <div style="font-size:13px; color:var(--muted); line-height:1.8;">
+        <strong style="color:var(--text); display:block; margin-bottom:8px;">&#x1F4E1; RSS Feeds Used (No API Key Needed)</strong>
+        These feeds are currently active in this site:<br>
+        • <code style="color:var(--teal); font-size:12px;">timesofindia.indiatimes.com/rssfeeds</code> — Times of India (India)<br>
+        • <code style="color:var(--teal); font-size:12px;">theprint.in/feed</code> — The Print (NE India)<br>
+        • <code style="color:var(--teal); font-size:12px;">eastmojo.com/feed</code> — EastMojo (Northeast India)<br>
+        • <code style="color:var(--teal); font-size:12px;">nenow.in/feed</code> — NE Now News<br>
+        • <code style="color:var(--teal); font-size:12px;">morungexpress.com/feed</code> — Morung Express (NE)<br>
+        All filtered live for <strong style="color:var(--accent)">Tripura</strong> keywords.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>TripuraToday</strong> — Aggregating news from free public sources &amp; RSS feeds.<br>
+  All articles redirect to their original publishers. Content belongs to respective sources.<br>
+  <span style="font-size:11px; opacity:0.6;">Auto-refreshes every 10 minutes &bull; Built for Tripura</span>
+</footer>
+
+<script>
+// ─── CONFIG ────────────────────────────────────────────────────────────────
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const TRIPURA_KEYWORDS = ['tripura', 'agartala', 'tpsc', 'trpsc', 'tripura govt', 'north tripura', 'south tripura', 'dhalai', 'gomati', 'unakoti', 'sepahijala', 'khowai', 'sipahijala', 'tripura police', 'tripura bjp', 'tripura congress', 'biplab', 'manik saha', 'tripura jobs', 'tripura recruitment'];
+
+const RSS_FEEDS = [
+  { url: 'https://feeds.feedburner.com/ndtvnews-top-stories', name: 'NDTV India' },
+  { url: 'https://theprint.in/feed/', name: 'The Print' },
+  { url: 'https://eastmojo.com/feed/', name: 'EastMojo' },
+  { url: 'https://nenow.in/feed', name: 'NE Now' },
+  { url: 'https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml', name: 'Hindustan Times' },
+  { url: 'https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms', name: 'Times of India' },
+  { url: 'https://indianexpress.com/section/india/feed/', name: 'Indian Express' },
+  { url: 'https://www.thehindu.com/news/national/feeder/default.rss', name: 'The Hindu' },
+];
+
+// ─── STATE ──────────────────────────────────────────────────────────────────
+let allArticles = [];
+let rssArticles = [];
+
+// ─── TABS ────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ─── HASHTAG FILTER ──────────────────────────────────────────────────────────
+document.querySelectorAll('.hashtag').forEach(h => {
+  h.addEventListener('click', () => {
+    document.querySelectorAll('.hashtag').forEach(x => x.classList.remove('active'));
+    h.classList.add('active');
+    const f = h.dataset.filter;
+    const search = document.getElementById('search-all');
+    if(search) search.value = f === 'all' ? '' : f;
+    filterCards('all');
+  });
+});
+
+// ─── UTILITIES ───────────────────────────────────────────────────────────────
+function isTripuraRelated(title, desc) {
+  const text = ((title || '') + ' ' + (desc || '')).toLowerCase();
+  return TRIPURA_KEYWORDS.some(k => text.includes(k));
+}
+
+function isJobRelated(title, desc) {
+  const text = ((title || '') + ' ' + (desc || '')).toLowerCase();
+  return ['job', 'recruitment', 'vacancy', 'apply', 'hiring', 'trpsc', 'tpsc', 'government post', 'notification', 'admit card', 'result'].some(k => text.includes(k));
+}
+
+function detectTag(title, desc) {
+  const text = ((title || '') + ' ' + (desc || '')).toLowerCase();
+  if (['job', 'recruitment', 'vacancy', 'trpsc', 'tpsc', 'apply', 'hiring', 'notification', 'admit card'].some(k => text.includes(k))) return { label: '#JobNews', cls: 'tag-job' };
+  if (['bjp', 'congress', 'election', 'mla', 'minister', 'cm ', 'chief minister', 'assembly', 'party'].some(k => text.includes(k))) return { label: '#Politics', cls: 'tag-politics' };
+  if (['sports', 'cricket', 'football', 'kabaddi', 'athlete', 'tournament', 'game', 'match'].some(k => text.includes(k))) return { label: '#Sports', cls: 'tag-sports' };
+  if (['project', 'development', 'infrastructure', 'road', 'bridge', 'scheme', 'smart city', 'invest'].some(k => text.includes(k))) return { label: '#Development', cls: 'tag-development' };
+  return { label: '#TripuraNews', cls: 'tag-news' };
+}
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
+  if (diff < 1) return 'Just now';
+  if (diff < 60) return diff + 'm ago';
+  if (diff < 1440) return Math.floor(diff / 60) + 'h ago';
+  return Math.floor(diff / 1440) + 'd ago';
+}
+
+function makeCard(article) {
+  const tag = detectTag(article.title, article.description);
+  const a = document.createElement('a');
+  a.className = 'news-card';
+  a.href = article.link;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.setAttribute('data-title', (article.title || '').toLowerCase());
+  a.setAttribute('data-desc', (article.description || '').toLowerCase());
+  a.setAttribute('data-tag', tag.label.toLowerCase());
+  a.innerHTML = `
+    <div class="card-meta">
+      <div class="card-source"><span class="source-dot"></span>${article.source || 'News'}</div>
+      <div class="card-time">${timeAgo(article.pubDate)}</div>
+    </div>
+    <div class="card-title">${article.title || 'No title'}</div>
+    ${article.description ? `<div class="card-desc">${article.description.replace(/<[^>]*>/g,'').substring(0,120)}...</div>` : ''}
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px;">
+      <div class="card-tags"><span class="card-tag ${tag.cls}">${tag.label}</span></div>
+      <span class="card-link-arrow">&#x2197;</span>
+    </div>
+  `;
+  return a;
+}
+
+function renderGrid(containerId, articles) {
+  const grid = document.getElementById(containerId);
+  if (!articles.length) {
+    grid.innerHTML = '<div class="empty-state">No Tripura news found from this source right now.</div>';
+    return;
+  }
+  grid.innerHTML = '';
+  articles.forEach(a => grid.appendChild(makeCard(a)));
+}
+
+function showSkeleton(gridId, count=6) {
+  const g = document.getElementById(gridId);
+  g.innerHTML = '';
+  g.className = 'skeleton-grid';
+  for(let i=0;i<count;i++) {
+    g.innerHTML += `<div class="skeleton-card">
+      <div class="skel skel-meta" style="width:35%;"></div>
+      <div class="skel skel-title"></div>
+      <div class="skel skel-title2"></div>
+      <div class="skel skel-line" style="width:80%;"></div>
+      <div class="skel skel-line" style="width:55%;"></div>
+    </div>`;
+  }
+}
+
+function filterCards(section) {
+  const q = (document.getElementById('search-' + section)?.value || '').toLowerCase();
+  const activeHashtag = document.querySelector('.hashtag.active')?.dataset.filter || 'all';
+
+  document.querySelectorAll(`#grid-${section} .news-card`).forEach(card => {
+    const title = card.getAttribute('data-title') || '';
+    const desc = card.getAttribute('data-desc') || '';
+    const tag = card.getAttribute('data-tag') || '';
+    const matchSearch = !q || title.includes(q) || desc.includes(q) || tag.includes(q);
+    const matchTag = section !== 'all' || activeHashtag === 'all' || tag.includes(activeHashtag);
+    card.style.display = matchSearch && matchTag ? '' : 'none';
+  });
+}
+
+// ─── FETCH RSS ────────────────────────────────────────────────────────────────
+async function fetchRSSSingle(feed) {
+  try {
+    const url = RSS2JSON + encodeURIComponent(feed.url) + '&count=30';
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.status !== 'ok' || !data.items) return [];
+    return data.items
+      .filter(item => isTripuraRelated(item.title, item.description))
+      .map(item => ({
+        title: item.title,
+        description: item.description,
+        link: item.link,
+        pubDate: item.pubDate,
+        source: feed.name
+      }));
+  } catch(e) { return []; }
+}
+
+async function fetchRSSFeeds() {
+  const btn = document.getElementById('refresh-rss');
+  if(btn) btn.classList.add('loading');
+  showSkeleton('grid-rss', 6);
+  document.getElementById('status-rss').textContent = 'Fetching feeds...';
+
+  const results = await Promise.allSettled(RSS_FEEDS.map(f => fetchRSSSingle(f)));
+  let articles = [];
+  results.forEach(r => { if(r.status === 'fulfilled') articles = articles.concat(r.value); });
+  articles.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+  rssArticles = articles;
+  document.getElementById('grid-rss').className = 'news-grid';
+  renderGrid('grid-rss', articles);
+  document.getElementById('count-rss').textContent = articles.length;
+  document.getElementById('status-rss').textContent = articles.length + ' articles from RSS';
+
+  if(btn) btn.classList.remove('loading');
+  return articles;
+}
+
+// ─── FETCH ALL ────────────────────────────────────────────────────────────────
+async function fetchAllNews() {
+  const btn = document.getElementById('refresh-all');
+  if(btn) btn.classList.add('loading');
+  showSkeleton('grid-all', 9);
+  document.getElementById('status-all').textContent = 'Loading from sources...';
+
+  const rss = await fetchRSSFeeds();
+  allArticles = [...rss];
+  allArticles.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+  document.getElementById('grid-all').className = 'news-grid';
+  renderGrid('grid-all', allArticles);
+  document.getElementById('count-all').textContent = allArticles.length;
+  document.getElementById('status-all').textContent = allArticles.length + ' total articles';
+
+  // Update ticker
+  if(allArticles.length) {
+    const titles = allArticles.slice(0,12).map(a => '&#x25CF; ' + a.title).join('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+    const t = document.getElementById('ticker-text');
+    t.innerHTML = `<span>${titles}</span><span>${titles}</span>`;
+  }
+
+  showJobsFromStored();
+  if(btn) btn.classList.remove('loading');
+}
+
+// ─── JOBS ─────────────────────────────────────────────────────────────────────
+function showJobsFromStored() {
+  const jobs = allArticles.filter(a => isJobRelated(a.title, a.description));
+  document.getElementById('grid-jobs').className = 'news-grid';
+  renderGrid('grid-jobs', jobs);
+  document.getElementById('count-jobs').textContent = jobs.length;
+  document.getElementById('status-jobs').textContent = jobs.length + ' job articles found';
+  jobs.forEach(j => {
+    const g = document.getElementById('grid-jobs');
+    const cards = g.querySelectorAll('.news-card');
+    cards.forEach(c => {
+      if(c.getAttribute('data-title') === (j.title||'').toLowerCase()) {
+        c.setAttribute('data-tag', '#jobnews');
+      }
+    });
+  });
+}
+
+// ─── GNEWS ────────────────────────────────────────────────────────────────────
+async function fetchGNews() {
+  const key = document.getElementById('gnews-key')?.value.trim();
+  if(!key) { alert('Please enter your GNews API key. Get one free at gnews.io'); return; }
+
+  showSkeleton('grid-gnews', 6);
+  try {
+    const url = `https://gnews.io/api/v4/search?q=Tripura&lang=en&country=in&max=20&apikey=${key}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if(!data.articles || data.articles.length === 0) {
+      document.getElementById('grid-gnews').innerHTML = '<div class="error-box"><h3>No results</h3><p>Check your API key or try again later.</p></div>';
+      return;
+    }
+    const articles = data.articles.map(a => ({
+      title: a.title,
+      description: a.description,
+      link: a.url,
+      pubDate: a.publishedAt,
+      source: a.source?.name || 'GNews'
+    }));
+    document.getElementById('grid-gnews').className = 'news-grid';
+    renderGrid('grid-gnews', articles);
+    document.getElementById('count-gnews').textContent = articles.length;
+
+    allArticles = [...allArticles, ...articles];
+    allArticles = [...new Map(allArticles.map(a => [a.link, a])).values()];
+    allArticles.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+    renderGrid('grid-all', allArticles);
+    document.getElementById('count-all').textContent = allArticles.length;
+  } catch(e) {
+    document.getElementById('grid-gnews').innerHTML = `<div class="error-box"><h3>API Error</h3><p>Could not fetch from GNews. Ensure your key is valid and you're within the free limit (100/day).</p></div>`;
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+fetchAllNews();
+setInterval(fetchAllNews, 10 * 60 * 1000); // auto-refresh every 10 min
+</script>
+</body>
+</html>
